@@ -4,8 +4,9 @@ def clean(input1, input2):
     df1 = pd.read_csv(input1)
     df2 = pd.read_csv(input2)
     df = pd.merge(df1, df2, left_on='respondent_id', right_on='id')
+    df = df.drop(columns='id')
     df = df.dropna()
-    df = df.drop(df[df['job'].str.contains['insurance', 'Insurance']])
+    df = df[~df['job'].str.contains('insurance','Insurance')]
     return df
 
 if __name__ == '__main__':
